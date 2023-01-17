@@ -1,0 +1,12 @@
+
+tasks.register('clean') {
+    group = 'build'
+    dependsOn gradle.includedBuild('my-conventions').task(':clean')
+    dependsOn subprojects.collect { it.tasks.findByName('clean') }
+}
+
+tasks.register('build') {
+    group = 'build'
+    dependsOn gradle.includedBuild('my-conventions').task(':build')
+    dependsOn subprojects.collect { it.tasks.findByName('build') }
+}

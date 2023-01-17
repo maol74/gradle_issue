@@ -1,0 +1,40 @@
+plugins {
+    id 'groovy'
+    id 'jvm-test-suite'
+    id 'java-library'
+    id 'idea'
+}
+
+group = rootProject.group
+version = rootProject.version
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    ivy
+}
+
+dependencies {
+    ivy 'org.apache.ivy:ivy:2.4.0'
+}
+
+tasks.withType(GroovyCompile) {
+    groovyClasspath += configurations.ivy
+}
+
+testing {
+    suites {
+        test(JvmTestSuite) {
+            useSpock('2.0-groovy-3.0')
+        }
+    }
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
