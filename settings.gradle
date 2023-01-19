@@ -1,8 +1,8 @@
 pluginManagement {
+    includeBuild('my-conventions')
     repositories {
         gradlePluginPortal()
     }
-    includeBuild('my-conventions')
 }
 
 rootProject.name = 'gradle-issue'
